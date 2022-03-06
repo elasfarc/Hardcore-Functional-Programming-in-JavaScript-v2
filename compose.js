@@ -97,10 +97,11 @@ QUnit.test("Ex4: sanitizeNames", (assert) => {
 // ============
 // Refactor availablePrices with compose.
 
-const availablePrices = function (cars) {
-  const available_cars = _.filter(_.prop("in_stock"), cars);
-  return available_cars.map((x) => formatMoney(x.dollar_value)).join(", ");
-};
+const availablePrices = _.compose(
+  _.join(", "),
+  _.map(_.compose(formatMoney, _.prop("dollar_value"))),
+  _.filter(_.prop("in_stock"))
+);
 
 QUnit.test("Bonus 1: availablePrices", (assert) => {
   assert.deepEqual(availablePrices(CARS), "$700,000.00, $1,850,000.00");
