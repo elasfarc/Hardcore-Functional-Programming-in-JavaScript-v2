@@ -61,15 +61,7 @@ QUnit.test("Ex2: filter", (assert) => {
 const _keepHighest = (x, y) => (x >= y ? x : y); // <- leave be
 
 // TODO: rewrite max in its "simplest" form
-const max = function (xs) {
-  return _.reduce(
-    function (acc, x) {
-      return _keepHighest(acc, x);
-    },
-    0,
-    xs
-  );
-};
+
 const max = _.reduce(_keepHighest, 0);
 
 QUnit.test("Ex3: max", (assert) => {
