@@ -51,7 +51,7 @@ QUnit.test("Ex1: isLastInStock", (assert) => {
 // ============
 // use _.compose(), _.prop() and _.head() to retrieve the name of the first car
 
-const nameOfFirstCar = undefined;
+const nameOfFirstCar = _.compose(_.prop("name"), _.head);
 
 QUnit.test("Ex2: nameOfFirstCar", (assert) => {
   assert.equal(nameOfFirstCar(CARS), "Ferrari FF");
