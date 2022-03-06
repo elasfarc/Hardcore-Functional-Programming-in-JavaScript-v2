@@ -1,3 +1,5 @@
+//https://codepen.io/drboolean/pen/zYYPmZO?editors=0011
+
 // Setup
 //==============
 const _ = R;
@@ -37,10 +39,7 @@ const CARS = [
 // ============
 // use _.compose() to rewrite the function below. Hint: _.prop() is curried.
 
-const isLastInStock = (cars) => {
-  var reversed_cars = _.last(cars);
-  return _.prop("in_stock", reversed_cars);
-};
+const isLastInStock = _.compose(_.prop("in_stock"), _.last);
 
 QUnit.test("Ex1: isLastInStock", (assert) => {
   assert.deepEqual(isLastInStock(CARS), false);
