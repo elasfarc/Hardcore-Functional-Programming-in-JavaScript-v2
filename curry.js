@@ -82,7 +82,7 @@ QUnit.test("Bonus 1", (assert) => {
 // Bonus 2:
 // ============
 // use slice to define a function take() that takes n elements from an array. make it curried
-const take = undefined;
+const take = slice(0);
 
 QUnit.test("Bonus 2", (assert) => {
   assert.deepEqual(take(2)(["a", "b", "c"]), ["a", "b"]);
