@@ -23,7 +23,8 @@ QUnit.test("Ex1: split", (assert) => {
 //==============
 //use map to make a new words fn that not only works on 1 string, but on an array of strings.
 
-const sentences = (xs) => _.map(words, xs);
+// const sentences = (xs) => _.map(words, xs);
+const sentences = _.map(words);
 
 QUnit.test("Ex1a: map/split", (assert) => {
   assert.deepEqual(
