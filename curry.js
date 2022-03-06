@@ -73,7 +73,7 @@ QUnit.test("Ex3: max", (assert) => {
 // wrap array's built in slice to be functional and curried like ramda fn's.
 // //[1,2,3].slice(0, 2)
 
-const slice = undefined;
+const slice = (start) => (end) => (list) => list.slice(start, end);
 
 QUnit.test("Bonus 1", (assert) => {
   assert.deepEqual(slice(1)(3)(["a", "b", "c"]), ["b", "c"]);
