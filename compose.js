@@ -122,11 +122,12 @@ QUnit.test("Bonus 1: availablePrices", (assert) => {
 // ============
 // Refactor to pointfree.
 
-const fastestCar = function (cars) {
-  const sorted = _.sortBy((car) => car.horsepower, cars);
-  const fastest = _.last(sorted);
-  return fastest.name + " is the fastest";
-};
+const fastestCar = _.compose(
+  _.concat(_.__, " is the fastest"),
+  _.prop("name"),
+  _.last,
+  _.sortBy(_.prop("horsepower"))
+);
 
 QUnit.test("Bonus 2: fastestCar", (assert) => {
   assert.equal(fastestCar(CARS), "Aston Martin One-77 is the fastest");
