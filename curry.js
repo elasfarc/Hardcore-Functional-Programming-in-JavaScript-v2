@@ -38,11 +38,13 @@ QUnit.test("Ex1a: map/split", (assert) => {
 
 // Exercise 2
 //==============
-const filterQs = function (xs) {
-  return _.filter(function (x) {
-    return _.test(/q/gi, x);
-  }, xs);
-};
+// const filterQs = function (xs) {
+//   return _.filter(function (x) {
+//     return _.test(/q/gi, x);
+//   }, xs);
+// };
+
+const filterQs = _.filter(_.test(/q/gi));
 
 QUnit.test("Ex2: filter", (assert) => {
   assert.deepEqual(filterQs(["quick", "camels", "quarry", "over", "quails"]), [
