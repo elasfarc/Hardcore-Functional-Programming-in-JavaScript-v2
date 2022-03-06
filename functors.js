@@ -1,3 +1,5 @@
+//https://codepen.io/drboolean/pen/poodxOm?editors=0011
+
 const Box = (x) => ({
   map: (f) => Box(f(x)),
   fold: (f) => f(x),
@@ -11,7 +13,12 @@ const Box = (x) => ({
 
 // Ex1: Using Box, refactor moneyToFloat to be unnested.
 // =========================
-const moneyToFloat = (str) => parseFloat(str.replace(/\$/, ""));
+// const moneyToFloat = (str) => parseFloat(str.replace(/\$/, ""));
+
+const moneyToFloat = (str) =>
+  Box(str)
+    .map((str) => str.replace(/\$/, ""))
+    .fold(parseFloat);
 
 QUnit.test("Ex1: moneyToFloat", (assert) => {
   assert.equal(String(moneyToFloat("$5.00")), 5);
