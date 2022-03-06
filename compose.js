@@ -80,7 +80,7 @@ QUnit.test("Ex3: averageDollarValue", (assert) => {
 
 const _underscore = _.replace(/\W+/g, "_"); //<-- leave this alone and use to sanitize
 
-const sanitizeNames = undefined;
+const sanitizeNames = _.map(_.compose(_underscore, _.toLower, _.prop("name")));
 
 QUnit.test("Ex4: sanitizeNames", (assert) => {
   assert.deepEqual(sanitizeNames(CARS), [
