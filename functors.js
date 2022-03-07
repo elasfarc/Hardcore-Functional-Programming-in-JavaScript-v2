@@ -26,10 +26,16 @@ QUnit.test("Ex1: moneyToFloat", (assert) => {
 
 // Ex2: Using Box, refactor percentToFloat to remove assignment
 // =========================
-const percentToFloat = (str) => {
-  const float = parseFloat(str.replace(/\%/, ""));
-  return float * 0.01;
-};
+// const percentToFloat = (str) => {
+//   const float = parseFloat(str.replace(/\%/, ""));
+//   return float * 0.01;
+// };
+const multiply = (y) => (x) => x * y;
+const percentToFloat = (str) =>
+  Box(str)
+    .map((str) => str.replace(/\%/, ""))
+    .map(parseFloat)
+    .fold(multiply(0.01));
 
 QUnit.test("Ex2: percentToFloat", (assert) => {
   assert.equal(String(percentToFloat("20%")), 0.2);
