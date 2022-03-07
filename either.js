@@ -84,14 +84,22 @@ QUnit.test("Ex1: streetName", (assert) => {
 
 // Ex2: Refactor parseDbUrl to return an Either instead of try/catch
 // =========================
-const parseDbUrl = (cfg) => {
-  try {
-    const c = JSON.parse(cfg); // throws if it can't parse
-    return c.url.match(DB_REGEX);
-  } catch (e) {
-    return null;
-  }
-};
+// const parseDbUrl = (cfg) => {
+//   try {
+//     const c = JSON.parse(cfg); // throws if it can't parse
+//     return c.url.match(DB_REGEX);
+//   } catch (e) {
+//     return null;
+//   }
+// };
+
+const idendtity = (v) => v;
+const jsonParser = (cfg) => () => JSON.parse(cfg);
+const parseDbUrl = (cfg) =>
+  Right(cfg)
+    .chain((c) => tryCatch(jsonParser(c)))
+    .map((urlObj) => urlObj.url.match(DB_REGEX))
+    .fold(() => null, idendtity);
 
 QUnit.test("Ex1: parseDbUrl", (assert) => {
   const config = '{"url": "postgres://sally:muppets@localhost:5432/mydb"}';
