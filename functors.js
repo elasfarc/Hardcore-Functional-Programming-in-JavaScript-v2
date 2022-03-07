@@ -43,12 +43,14 @@ QUnit.test("Ex2: percentToFloat", (assert) => {
 
 // Ex3: Using Box, refactor applyDiscount (hint: each variable introduces a new Box)
 // =========================
+
+/*
 const applyDiscount = (price, discount) => {
   const cents = moneyToFloat(price);
   const savings = percentToFloat(discount);
   return cents - cents * savings;
 };
-
+*/
 const applyDiscount = (price, discount) =>
   Box(price)
     .map(moneyToFloat)
