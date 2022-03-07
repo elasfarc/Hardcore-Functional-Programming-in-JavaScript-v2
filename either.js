@@ -1,3 +1,5 @@
+// https://codepen.io/drboolean/pen/xgoeWR?editors=0010
+
 // Definitions
 // ====================
 const Right = (x) => ({
@@ -38,6 +40,7 @@ const DB_REGEX = /postgres:\/\/([^:]+):([^@]+)@.*?\/(.+)$/i;
 
 // Ex1: Refactor streetName to use Either instead of nested if's
 // =========================
+/*
 const street = (user) => {
   const address = user.address;
 
@@ -47,7 +50,15 @@ const street = (user) => {
     return "no street";
   }
 };
+*/
 
+const street = (user) =>
+  fromNullable(user.address)
+    .chain((adress) => fromNullable(adress.street))
+    .fold(
+      () => "no street",
+      (street) => street
+    );
 QUnit.test("Ex1: street", (assert) => {
   const user = { address: { street: { name: "Willow" } } };
   assert.deepEqual(street(user), { name: "Willow" });
