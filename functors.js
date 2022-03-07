@@ -49,6 +49,15 @@ const applyDiscount = (price, discount) => {
   return cents - cents * savings;
 };
 
+const applyDiscount = (price, discount) =>
+  Box(price)
+    .map(moneyToFloat)
+    .fold((cents) =>
+      Box(discount)
+        .map(percentToFloat)
+        .fold((savings) => cents - multiply(cents)(savings))
+    );
+
 QUnit.test("Ex3: Apply discount", (assert) => {
   assert.equal(String(applyDiscount("$5.00", "20%")), 4);
 });
