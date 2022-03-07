@@ -67,19 +67,13 @@ QUnit.test("Ex1: street", (assert) => {
 
 // Ex1: Refactor streetName to use Either instead of nested if's
 // =========================
-const streetName = (user) => {
-  const address = user.address;
-
-  if (address) {
-    const street = address.street;
-
-    if (street) {
-      return street.name;
-    }
-  }
-
-  return "no street";
-};
+const streetName = (user) =>
+  fromNullable(street(user))
+    .chain((streetObj) => fromNullable(streetObj.name))
+    .fold(
+      () => "no street",
+      (streetName) => streetName
+    );
 
 QUnit.test("Ex1: streetName", (assert) => {
   const user = { address: { street: { name: "Willow" } } };
