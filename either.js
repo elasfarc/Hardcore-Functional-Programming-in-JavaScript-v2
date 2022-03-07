@@ -109,6 +109,8 @@ QUnit.test("Ex1: parseDbUrl", (assert) => {
 
 // Ex3: Using Either and the functions above, refactor startApp
 // =========================
+
+/*
 const startApp = (cfg) => {
   const parsed = parseDbUrl(cfg);
 
@@ -119,6 +121,14 @@ const startApp = (cfg) => {
     return "can't get config";
   }
 };
+*/
+
+const startApp = (cfg) =>
+  Right(cfg)
+    .map(parseDbUrl)
+    .chain(fromNullable)
+    .map(([_, user, password, db]) => `starting ${db}, ${user}, ${password}`)
+    .fold(() => "can't get config", idendtity);
 
 QUnit.test("Ex3: startApp", (assert) => {
   const config = '{"url": "postgres://sally:muppets@localhost:5432/mydb"}';
