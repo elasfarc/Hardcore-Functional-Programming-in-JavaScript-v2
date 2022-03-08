@@ -23,6 +23,11 @@ const getComments = (post) =>
 
 // Ex1: Use the result of getPost() and upperCase the title. Posts and comments are defined above and look like {title: String} and {id: Int, body: String} respectively.
 // =========================
+const toUpper = (v) => String(v).toUpperCase();
+const postTitle = (id) =>
+  getPost(id)
+    .map((post) => post.title)
+    .map(toUpper);
 
 QUnit.test("Ex1: postTitle", (assert) => {
   const done = assert.async();
