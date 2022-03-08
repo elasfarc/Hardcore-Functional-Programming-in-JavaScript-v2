@@ -58,11 +58,11 @@ QUnit.test("Ex2: commentsForPost", (assert) => {
 
 // Ex3: Wrap location.href in a Task to make it "pure"
 // =========================
-const getHref = location.href; // wrap me in Task
+const getHref = () => new Task((rej, res) => res(location.href));
 
 QUnit.test("Ex3: getHref", (assert) => {
   const done = assert.async();
-  getHref.fork(console.error, (t) => {
+  getHref().fork(console.error, (t) => {
     assert.equal(true, !!t.match("cdpn.io"));
     done();
   });
