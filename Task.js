@@ -39,7 +39,13 @@ QUnit.test("Ex1: postTitle", (assert) => {
 
 // Ex2: pass in the post to getComments(), defined above, then assign the returned comments to the post
 // =========================
-const commentsForPost = (id) => getPost(id);
+addEntry = (k) => (v) => (obj) =>
+  Object.assign(Object.create(Object.getPrototypeOf(obj)), obj, { [k]: v });
+
+const commentsForPost = (id) =>
+  getPost(id).chain((post) =>
+    getComments(post).map((comments) => addEntry("comments")(comments)(post))
+  );
 
 QUnit.test("Ex2: commentsForPost", (assert) => {
   const done = assert.async();
